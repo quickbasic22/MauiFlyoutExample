@@ -8,7 +8,6 @@ namespace MauiFlyoutExample.Views;
 public partial class ItemsPage : ContentPage
 {
     ItemsViewModel _viewModel;
-    private IDataStore<Item> data;
 
     public ItemsPage()
     {
@@ -20,5 +19,15 @@ public partial class ItemsPage : ContentPage
     {
         base.OnAppearing();
         _viewModel.OnAppearing();
+    }
+
+    private void swipeitem_Clicked(object sender, EventArgs e)
+    {
+        var swipeitem = sender as SwipeItem;
+        var item = swipeitem.BindingContext as Item;
+        if (item != null)
+        {
+            _viewModel.Items.Remove(item);
+        }
     }
 }

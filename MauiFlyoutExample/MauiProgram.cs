@@ -23,7 +23,7 @@ public static class MauiProgram
 		   builder.Services.AddSingleton<IDataStore<Item>, MockDataStore>();
 		   
 		   builder.Services.AddSingleton<BaseViewModel>();
-		   builder.Services.AddSingleton<LoginViewModel>();
+		   // builder.Services.AddSingleton<LoginViewModel>();
 		   builder.Services.AddSingleton<NewItemViewModel>();
 		   builder.Services.AddSingleton<ItemsViewModel>();
 		   builder.Services.AddSingleton<ItemDetailViewModel>();
