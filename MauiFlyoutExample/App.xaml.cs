@@ -8,7 +8,6 @@ public partial class App : Application
 	public App()
 	{
 		InitializeComponent();
-		DependencyService.Register<MockDataStore>();
 		Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
         Routing.RegisterRoute(nameof(ItemsPage), typeof(ItemsPage));
         Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));

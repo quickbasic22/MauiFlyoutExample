@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using MauiFlyoutExample.Models;
+using MauiFlyoutExample.Services;
+using System.Diagnostics;
 
 namespace MauiFlyoutExample.ViewModels
 {
@@ -8,6 +10,13 @@ namespace MauiFlyoutExample.ViewModels
         private string itemId;
         private string text;
         private string description;
+        private IDataStore<Item> DataStore { get; set; }
+
+        public ItemDetailViewModel(IDataStore<Item> dataStore)
+        {
+            DataStore = dataStore;
+        }
+
         public string Id { get; set; }
 
         public string Text

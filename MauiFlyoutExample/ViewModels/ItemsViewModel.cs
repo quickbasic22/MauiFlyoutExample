@@ -1,4 +1,5 @@
 ﻿using MauiFlyoutExample.Models;
+using MauiFlyoutExample.Services;
 using MauiFlyoutExample.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -13,16 +14,16 @@ namespace MauiFlyoutExample.ViewModels
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Item> ItemTapped { get; }
+        private IDataStore<Item> DataStore { get; }
 
-        public ItemsViewModel()
+        public ItemsViewModel(IDataStore<Item> dataStore)
         {
             Title = "Browse";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
             ItemTapped = new Command<Item>(OnItemSelected);
-
             AddItemCommand = new Command(OnAddItem);
+            DataStore = dataStore;
         }
 
         async Task ExecuteLoadItemsCommand()

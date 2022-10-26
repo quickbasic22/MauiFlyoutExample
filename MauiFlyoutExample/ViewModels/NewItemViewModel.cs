@@ -1,4 +1,6 @@
 ﻿using MauiFlyoutExample.Models;
+using MauiFlyoutExample.Services;
+using MauiFlyoutExample.Views;
 
 namespace MauiFlyoutExample.ViewModels
 {
@@ -6,9 +8,10 @@ namespace MauiFlyoutExample.ViewModels
     {
         private string text;
         private string description;
-
-        public NewItemViewModel()
+        private IDataStore<Item> DataStore { get; set; }
+        public NewItemViewModel(IDataStore<Item> dataStore)  
         {
+            this.DataStore = dataStore;
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
