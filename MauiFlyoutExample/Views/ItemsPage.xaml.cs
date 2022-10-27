@@ -25,9 +25,11 @@ public partial class ItemsPage : ContentPage
     {
         var swipeitem = sender as SwipeItem;
         var item = swipeitem.BindingContext as Item;
-        if (item != null)
-        {
-            _viewModel.Items.Remove(item);
-        }
+        //if (item != null)
+        //{
+        //    _viewModel.Items.Remove(item);
+        //}
+
+        _viewModel.DeleteCommand.Execute(item);
     }
 }

@@ -19,7 +19,7 @@
                 <DataTemplate>
                     <SwipeView>
                         <SwipeView.RightItems>
-                            <SwipeItems>
+                            <SwipeItems SwipeBehaviorOnInvoked="Close">
                                 <SwipeItem x:Name="swipeitem" Text="Delete" BackgroundColor="Red" Clicked="swipeitem_Clicked" />
                             </SwipeItems>
                         </SwipeView.RightItems>

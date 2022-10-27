@@ -1,4 +1,5 @@
-﻿using MauiFlyoutExample.Models;
+﻿using MauiFlyoutExample.Data;
+using MauiFlyoutExample.Models;
 using MauiFlyoutExample.Services;
 using MauiFlyoutExample.ViewModels;
 using MauiFlyoutExample.Views;
@@ -9,6 +10,7 @@ namespace MauiFlyoutExample;
 
 public static class MauiProgram
 {
+   static string dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Items.db3");
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
@@ -20,7 +22,9 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		   builder.Services.AddSingleton<IDataStore<Item>, MockDataStore>();
+		   // builder.Services.AddSingleton<IDataStore<Item>, MockDataStore>();
+
+		builder.Services.AddSingleton<NoteDatabase>(ser => new NoteDatabase(dbpath));
 		   
 		   builder.Services.AddSingleton<BaseViewModel>();
 		   // builder.Services.AddSingleton<LoginViewModel>();

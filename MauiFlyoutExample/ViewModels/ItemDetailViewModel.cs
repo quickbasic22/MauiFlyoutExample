@@ -1,4 +1,5 @@
-﻿using MauiFlyoutExample.Models;
+﻿using MauiFlyoutExample.Data;
+using MauiFlyoutExample.Models;
 using MauiFlyoutExample.Services;
 using System.Diagnostics;
 
@@ -10,9 +11,9 @@ namespace MauiFlyoutExample.ViewModels
         private string itemId;
         private string text;
         private string description;
-        private IDataStore<Item> DataStore { get; set; }
+        private NoteDatabase DataStore { get; set; }
 
-        public ItemDetailViewModel(IDataStore<Item> dataStore)
+        public ItemDetailViewModel(NoteDatabase dataStore)
         {
             DataStore = dataStore;
         }
@@ -48,7 +49,7 @@ namespace MauiFlyoutExample.ViewModels
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
+                var item = await DataStore.GetItemByIdAsync(itemId);
                 Id = item.Id;
                 Text = item.Text;
                 Description = item.Description;

@@ -1,4 +1,5 @@
-﻿using MauiFlyoutExample.Models;
+﻿using MauiFlyoutExample.Data;
+using MauiFlyoutExample.Models;
 using MauiFlyoutExample.Services;
 using MauiFlyoutExample.Views;
 
@@ -8,8 +9,8 @@ namespace MauiFlyoutExample.ViewModels
     {
         private string text;
         private string description;
-        private IDataStore<Item> DataStore { get; set; }
-        public NewItemViewModel(IDataStore<Item> dataStore)  
+        private NoteDatabase DataStore { get; set; }
+        public NewItemViewModel(NoteDatabase dataStore)  
         {
             this.DataStore = dataStore;
             SaveCommand = new Command(OnSave, ValidateSave);
@@ -54,7 +55,7 @@ namespace MauiFlyoutExample.ViewModels
                 Description = Description
             };
 
-            await DataStore.AddItemAsync(newItem);
+            await DataStore.SaveItemAsync(newItem);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
