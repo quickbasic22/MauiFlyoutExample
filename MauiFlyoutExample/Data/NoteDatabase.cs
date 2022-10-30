@@ -1,44 +1,37 @@
 ﻿using MauiFlyoutExample.Models;
 using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MauiFlyoutExample.Data
 {
     public class NoteDatabase
     {
-        readonly SQLiteAsyncConnection database;
+       readonly SQLiteAsyncConnection database;
+
         public NoteDatabase(string dbPath)
         {
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<Item>().Wait();
         }
-       
-        public Task<List<Item>> GetItemsAsync()
+        
+        public async Task<List<Item>> GetItemsAsync()
         {
-            return database.Table<Item>().ToListAsync();
+            return await database.Table<Item>().ToListAsync();
         }
-        public Task<Item> GetItemByIdAsync(string id)
+        public async Task<Item> GetItemByIdAsync(string id)
         {
-            return database.Table<Item>().FirstOrDefaultAsync(x => x.Id == id);
+            return await database.Table<Item>().FirstOrDefaultAsync(x => x.Id == id);
         }
-        public Task<int> SaveItemAsync(Item item)
-        {
-            if (item.Id != null)
-            {
-                return database.UpdateAsync(item);
-            }
-            else
-            {
-                return database.InsertAsync(item);
-            }
+        public async Task<int> AddItemAsync(Item item)
+        { 
+             return await database.InsertAsync(item);
         }
-        public Task<int> DeleteItemAsync(Item item)
+        public async Task<int> UpdateItemAsync(Item item)
         {
-            return database.DeleteAsync(item);
+            return await database.UpdateAsync(item);
+        }
+        public async Task<int> DeleteItemAsync(Item item)
+        {
+            return await database.DeleteAsync(item);
         }
     }
 }

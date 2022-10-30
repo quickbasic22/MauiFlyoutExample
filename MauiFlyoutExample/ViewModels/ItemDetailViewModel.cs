@@ -1,6 +1,5 @@
 ﻿using MauiFlyoutExample.Data;
 using MauiFlyoutExample.Models;
-using MauiFlyoutExample.Services;
 using System.Diagnostics;
 
 namespace MauiFlyoutExample.ViewModels
@@ -11,12 +10,36 @@ namespace MauiFlyoutExample.ViewModels
         private string itemId;
         private string text;
         private string description;
-        private NoteDatabase DataStore { get; set; }
+        private DateTime notedate;
+        private bool done;
+        //public Command<Item> UpdateCommand { get; set; }
+        //public Command<Item> DeleteCommand { get; set; }
 
-        public ItemDetailViewModel(NoteDatabase dataStore)
+        public ItemDetailViewModel()
         {
-            DataStore = dataStore;
+            //UpdateCommand = new Command<Item>(UpdateItem);
+            //DeleteCommand = new Command<Item>(DeleteItem);
         }
+
+        //private async void DeleteItem(Item obj)
+        //{
+        //    var item = obj as Item;
+        //    if (item != null)
+        //    {
+        //        await DataStore.DeleteItemAsync(item);
+        //    }
+        //    await Shell.Current.GoToAsync("..");
+        //}
+
+        //private async void UpdateItem(Item obj)
+        //{
+        //    var item = obj as Item;
+        //    if (item != null)
+        //    {
+        //        await DataStore.UpdateItemAsync(item);
+        //    }
+        //    await Shell.Current.GoToAsync("..");
+        //}
 
         public string Id { get; set; }
 
@@ -30,6 +53,16 @@ namespace MauiFlyoutExample.ViewModels
         {
             get => description;
             set => SetProperty(ref description, value);
+        }
+        public DateTime NoteDate
+        {
+            get => notedate;
+            set => SetProperty(ref notedate, value);
+        }
+        public bool Done
+        {
+            get => done;
+            set => SetProperty(ref done, value);
         }
 
         public string ItemId
@@ -53,6 +86,9 @@ namespace MauiFlyoutExample.ViewModels
                 Id = item.Id;
                 Text = item.Text;
                 Description = item.Description;
+                NoteDate = item.NoteDate;
+                Done = item.Done;
+                
             }
             catch (Exception)
             {

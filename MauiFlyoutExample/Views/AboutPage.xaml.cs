@@ -1,4 +1,3 @@
-using MauiFlyoutExample.Services;
 using MauiFlyoutExample.ViewModels;
 
 namespace MauiFlyoutExample.Views;
@@ -9,6 +8,7 @@ public partial class AboutPage : ContentPage
 	public AboutPage()
 	{
 		InitializeComponent();
-		BindingContext = Helpers.ServiceHelper.GetService<AboutViewModel>();
+		BindingContext = new AboutViewModel();
+		// BindingContext = Helpers.ServiceHelper.GetService<AboutViewModel>();
 	}
 }

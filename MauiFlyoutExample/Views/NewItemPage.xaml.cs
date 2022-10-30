@@ -1,6 +1,6 @@
 using MauiFlyoutExample.Models;
-using MauiFlyoutExample.Services;
 using MauiFlyoutExample.ViewModels;
+
 namespace MauiFlyoutExample.Views;
 
 public partial class NewItemPage : ContentPage
@@ -10,6 +10,7 @@ public partial class NewItemPage : ContentPage
     public NewItemPage()
 	{
 		InitializeComponent();
-        BindingContext = Helpers.ServiceHelper.GetService<NewItemViewModel>();
+        BindingContext = new NewItemViewModel();
+        // BindingContext = Helpers.ServiceHelper.GetService<NewItemViewModel>();
     }
 }

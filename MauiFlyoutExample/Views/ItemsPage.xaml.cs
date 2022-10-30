@@ -1,6 +1,6 @@
 using MauiFlyoutExample.Models;
-using MauiFlyoutExample.Services;
 using MauiFlyoutExample.ViewModels;
+using System.ComponentModel;
 
 namespace MauiFlyoutExample.Views;
 
@@ -8,11 +8,12 @@ namespace MauiFlyoutExample.Views;
 public partial class ItemsPage : ContentPage
 {
     ItemsViewModel _viewModel;
-
+    
     public ItemsPage()
     {
         InitializeComponent();
-        BindingContext = _viewModel = Helpers.ServiceHelper.GetService<ItemsViewModel>();
+        BindingContext = _viewModel = new ItemsViewModel();
+        // BindingContext = _viewModel = Helpers.ServiceHelper.GetService<ItemsViewModel>();
     }
 
     protected override void OnAppearing()

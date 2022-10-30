@@ -1,7 +1,5 @@
 ﻿using MauiFlyoutExample.Data;
 using MauiFlyoutExample.Models;
-using MauiFlyoutExample.Services;
-using MauiFlyoutExample.Views;
 
 namespace MauiFlyoutExample.ViewModels
 {
@@ -9,10 +7,10 @@ namespace MauiFlyoutExample.ViewModels
     {
         private string text;
         private string description;
-        private NoteDatabase DataStore { get; set; }
-        public NewItemViewModel(NoteDatabase dataStore)  
+        private DateTime notedate;
+        private bool done;
+        public NewItemViewModel()  
         {
-            this.DataStore = dataStore;
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
@@ -36,6 +34,16 @@ namespace MauiFlyoutExample.ViewModels
             get => description;
             set => SetProperty(ref description, value);
         }
+        public DateTime NoteDate
+        {
+            get => notedate;
+            set => SetProperty(ref notedate, value);
+        }
+        public bool Done
+        {
+            get => done;
+            set => SetProperty(ref done, value);
+        }
 
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
@@ -52,10 +60,12 @@ namespace MauiFlyoutExample.ViewModels
             {
                 Id = Guid.NewGuid().ToString(),
                 Text = Text,
-                Description = Description
+                Description = Description,
+                NoteDate = NoteDate,
+                Done = Done
             };
 
-            await DataStore.SaveItemAsync(newItem);
+            await DataStore.AddItemAsync(newItem);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

@@ -1,15 +1,6 @@
-﻿using MauiFlyoutExample.Models;
-using MauiFlyoutExample.Services;
-using MauiFlyoutExample.ViewModels;
-using Microsoft.Maui.Controls;
-using System;
-using System.Collections.Generic;
+﻿using MauiFlyoutExample.Data;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MauiFlyoutExample.ViewModels
 {
@@ -17,6 +8,12 @@ namespace MauiFlyoutExample.ViewModels
     {
                   
         bool isBusy = false;
+
+        public NoteDatabase DataStore { get; set; }
+        public BaseViewModel()
+        {
+            DataStore = App.Database;
+        }
         public bool IsBusy
         {
             get { return isBusy; }

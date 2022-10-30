@@ -1,6 +1,5 @@
 ﻿using MauiFlyoutExample.Data;
 using MauiFlyoutExample.Models;
-using MauiFlyoutExample.Services;
 using MauiFlyoutExample.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -15,27 +14,27 @@ namespace MauiFlyoutExample.ViewModels
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Item> ItemTapped { get; }
-        public Command DeleteCommand { get; set; }
-        NoteDatabase DataStore;
-
-        public ItemsViewModel(NoteDatabase database)
+        public Command<Item> DeleteCommand { get; set; }
+       
+        public ItemsViewModel()
         {
             Title = "Browse";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<Item>(OnItemSelected);
             AddItemCommand = new Command(OnAddItem);
-            DeleteCommand = new Command(OnDelete); 
-            DataStore = database;
+            DeleteCommand = new Command<Item>(OnDelete);
+           
         }
-
-        private void OnDelete(object obj)
+        
+        private async void OnDelete(object obj)
         {
+           
             var item = obj as Item;
             if (item != null)
             {
                 Items.Remove(item);
-                DataStore.DeleteItemAsync(item);
+               await DataStore.DeleteItemAsync(item);
             }
         }
 

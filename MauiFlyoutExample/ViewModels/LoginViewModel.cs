@@ -1,5 +1,4 @@
 ﻿using MauiFlyoutExample.Models;
-using MauiFlyoutExample.Services;
 using MauiFlyoutExample.Views;
 
 namespace MauiFlyoutExample.ViewModels
